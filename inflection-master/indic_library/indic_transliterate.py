@@ -24,4 +24,31 @@ def transliterate_text(input_file, output_file, input_lang, output_lang):
     writeFile(output_file, transliterated)
     print("Completed")
 
-transliterate_text("2019-master/task1/sanskrit--bengali/sanskrit-train", "sanskrit-to-Bengali&Bengali/sanskrit-bengali", "sa", "bn")
+def normalizer_test(input_file, output_file, input_lang):
+    input_text = readFile(input_file)
+
+    #Normalize
+    remove_nuktas = False
+    factory=IndicNormalizerFactory()
+    normalizer=factory.get_normalizer(input_lang,remove_nuktas)
+    normalized = normalizer.normalize(input_text)
+    print("Text Normalized")
+    writeFile(output_file, normalized)
+    '''
+    transliterated = UnicodeIndicTransliterator.transliterate(normalized,
+                     input_lang,output_lang)
+    print("Text Transliterated")
+    seenTrans = set()
+    seenOrig = set()
+    for c in transliterated:
+        seenTrans.add(c)
+    original = readFile("2019-master/task1/hindi--bengali/bengali-train")
+    for c in original:
+        seenOrig.add(c)
+    print(seenTrans.difference(seenOrig), seenOrig.difference(seenTrans))
+    writeFile(output_file, transliterated)
+    '''
+    print("Completed")
+    
+normalizer_test("bengali-test", "bengali-test-norm", "bn")
+#transliterate_text("2019-master/task1/hindi--bengali/hindi-train", "sanskrit-to-Bengali&Bengali/sanskrit-bengali", "hi", "bn")
