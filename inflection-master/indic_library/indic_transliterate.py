@@ -1,5 +1,8 @@
 from indicnlp.transliterate.unicode_transliterate import UnicodeIndicTransliterator
 from indicnlp.normalize.indic_normalize import IndicNormalizerFactory
+import argparse
+
+
 # From https://www.cs.cmu.edu/~112/notes/notes-strings.html#basicFileIO
 def readFile(path):
     with open(path, "rt") as f:
@@ -24,7 +27,7 @@ def transliterate_text(input_file, output_file, input_lang, output_lang):
     writeFile(output_file, transliterated)
     print("Completed")
 
-def normalizer_test(input_file, output_file, input_lang):
+def normalizer_text(input_file, output_file, input_lang):
     input_text = readFile(input_file)
 
     #Normalize
@@ -34,21 +37,21 @@ def normalizer_test(input_file, output_file, input_lang):
     normalized = normalizer.normalize(input_text)
     print("Text Normalized")
     writeFile(output_file, normalized)
-    '''
-    transliterated = UnicodeIndicTransliterator.transliterate(normalized,
-                     input_lang,output_lang)
-    print("Text Transliterated")
-    seenTrans = set()
-    seenOrig = set()
-    for c in transliterated:
-        seenTrans.add(c)
-    original = readFile("2019-master/task1/hindi--bengali/bengali-train")
-    for c in original:
-        seenOrig.add(c)
-    print(seenTrans.difference(seenOrig), seenOrig.difference(seenTrans))
-    writeFile(output_file, transliterated)
-    '''
     print("Completed")
     
-normalizer_test("bengali-test", "bengali-test-norm", "bn")
+#normalizer_text("bengali-test", "bengali-test-norm", "bn")
 #transliterate_text("2019-master/task1/hindi--bengali/hindi-train", "sanskrit-to-Bengali&Bengali/sanskrit-bengali", "hi", "bn")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", help="path to input file", type=str, required=True)
+    parser.add_argument("--output", help="path to output file", type=str, 
+    required = True)
+    parser.add_argument("--L1", help="input language code", type=str, required=True)
+    parser.add_argument("--L2", help="output language code", type=str, required=True)
+    args = parser.parse_args()
+    input_file = args.input
+    output_file = args.output
+    L1 = args.L1
+    L2 = args.L2
+    transliterate_text(input_file, output_file, L1, L2)
