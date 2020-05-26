@@ -4,7 +4,7 @@ This is the code accompanying our paper "Transliteration for Cross-Lingual Morph
 ## Requirements
 Requires the following libraries:
 - ["Indic NLP Library"](https://github.com/anoopkunchukuttan/indic_nlp_library)
-- ["Epitran"]((https://github.com/dmort27/epitran)
+- ["Epitran"](https://github.com/dmort27/epitran)
 - ["URoman"](https://github.com/isi-nlp/uroman)
 - ["antonisa/inflection"](https://github.com/antonisa/inflection)
 
